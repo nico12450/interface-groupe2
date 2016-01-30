@@ -7,10 +7,7 @@ package pkginterface;
 
 import javax.swing.JFrame;
 
-/**
- *
- * @author nico
- */
+
 public class Principale {
 
     /**
