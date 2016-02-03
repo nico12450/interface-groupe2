@@ -24,9 +24,7 @@ public class MaFenetre extends JFrame
         JMenu menu1 = new JMenu("Fichier"); 
         JMenuItem item1 = new JMenuItem("Ouvrir"); 
         
-        /**/
-        
-        
+              
         /*Definir taille fenetre*/
         this.setSize(500, 500);
         
