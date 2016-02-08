@@ -2,6 +2,7 @@ package explogit;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.*;
 
@@ -49,20 +50,34 @@ public class MaFenetre extends JFrame
         font.add(top,BorderLayout.CENTER);
         
         /*evenement bouton et ouvrir*/
-        bouton1.addActionListener((ActionEvent e) -> 
+        bouton1.addActionListener(new ActionListener() 
         {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setMultiSelectionEnabled(true);
-            chooser.showOpenDialog(null);
-            File[] files = chooser.getSelectedFiles();
+            @Override
+            public void actionPerformed(ActionEvent ae) 
+            {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) 
+                {
+                    File selectedFile = fileChooser.getSelectedFile();
+              
+                }
+            }
         });
        
-        item1.addActionListener((ActionEvent e) -> 
+        item1.addActionListener(new ActionListener() 
         {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setMultiSelectionEnabled(true);
-            chooser.showOpenDialog(null);
-            File[] files = chooser.getSelectedFiles();
+            @Override
+            public void actionPerformed(ActionEvent ae) 
+            {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) 
+                {
+                    File selectedFile = fileChooser.getSelectedFile();
+              
+                }
+            }
         });
         
                 
