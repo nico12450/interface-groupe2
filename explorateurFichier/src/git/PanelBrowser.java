@@ -140,7 +140,8 @@ public class PanelBrowser extends Box {
     }
 
     private static void display() {
-        String path = System.getProperty("user.dir");//user.dir
+        String path = "C:\\Users\\romain\\Documents\\GitHub\\interface-groupe2\\.git";
+        //String path = System.getProperty("user.dir");
         PanelBrowser browser = new PanelBrowser(new File(path));
         JFrame f = new JFrame(path);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
