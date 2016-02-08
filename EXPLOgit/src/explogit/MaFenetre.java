@@ -3,7 +3,6 @@ package explogit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.*;
 
 
@@ -56,12 +55,8 @@ public class MaFenetre extends JFrame
             public void actionPerformed(ActionEvent ae) 
             {
                 JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) 
-                {
-                    File selectedFile = fileChooser.getSelectedFile();
-              
-                }
             }
         });
        
@@ -71,12 +66,8 @@ public class MaFenetre extends JFrame
             public void actionPerformed(ActionEvent ae) 
             {
                 JFileChooser fileChooser = new JFileChooser();
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue == JFileChooser.APPROVE_OPTION) 
-                {
-                    File selectedFile = fileChooser.getSelectedFile();
-              
-                }
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnValue = fileChooser.showOpenDialog(null);   
             }
         });
         
