@@ -10,7 +10,6 @@ public class MaFenetre extends JFrame
 {
     public MaFenetre(String nomFenetre)
     {
-    
         super(nomFenetre);
         /*creation des panel*/
         JPanel font = new JPanel();
