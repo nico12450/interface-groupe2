@@ -1,4 +1,4 @@
-package git;
+package explogit;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -24,13 +24,13 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 
 
-public class PanelBrowser extends Box 
+public class PanelBrowser extends Box
 {
-
+    
     private static final Dimension SIZE = new Dimension(200, 300);
     private List<FilePanel> list = new ArrayList<FilePanel>();
 
-    public PanelBrowser(File root) 
+    public PanelBrowser(File root)
     {
         super(BoxLayout.LINE_AXIS);
         setBackground(Color.red);
@@ -39,7 +39,7 @@ public class PanelBrowser extends Box
         this.add(panel);
     }
 
-    private void update(FilePanel fp, File file) 
+    public void update(FilePanel fp, File file) 
     {
         int index = list.indexOf(fp);
         int i = list.size() - 1;
@@ -110,7 +110,7 @@ public class PanelBrowser extends Box
             }
         }
 
-        private static class FileRenderer extends DefaultListCellRenderer 
+        public static class FileRenderer extends DefaultListCellRenderer 
         {
 
             @Override
@@ -128,6 +128,7 @@ public class PanelBrowser extends Box
 
         private class SelectionHandler implements ListSelectionListener 
         {
+            private Object FilePanel;
 
             @Override
             public void valueChanged(ListSelectionEvent e) 
@@ -159,9 +160,10 @@ public class PanelBrowser extends Box
         }
     }
 
-    private static void display() {
+    public static void display(String path) 
+    {
        // String path = "..//.git";
-        String path = "..\\..\\interface-groupe2";
+       // String path = "..\\..\\interface-groupe2";
         PanelBrowser browser = new PanelBrowser(new File(path));
         JFrame f = new JFrame("Explorateur fichier .git");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,7 +181,7 @@ public class PanelBrowser extends Box
         f.setVisible(true);
     }
 
-    public static void main(String[] args) 
+    /*public static void main(String[] args) 
     {
         EventQueue.invokeLater(new Runnable() 
         {
@@ -189,5 +191,5 @@ public class PanelBrowser extends Box
                 display();
             }
         });
-    }
+    }*/
 }

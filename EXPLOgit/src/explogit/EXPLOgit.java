@@ -5,13 +5,11 @@
  */
 package explogit;
 
-
-
 /**
  *
  * @author romain
  */
-public class EXPLOgit 
+public class EXPLOgit
 {
 
     /**
