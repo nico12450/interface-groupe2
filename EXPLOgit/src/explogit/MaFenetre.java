@@ -62,42 +62,29 @@ public class MaFenetre extends JFrame
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue==fileChooser.APPROVE_OPTION)
+                if (returnValue==JFileChooser.APPROVE_OPTION)
                 {
                     
                     System.out.println(fileChooser.getSelectedFile().getName());
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                     final String  path=fileChooser.getSelectedFile().getAbsolutePath();
-                    
-                    this.addActionListener(new ActionListener() 
+                    EventQueue.invokeLater(new Runnable() 
                     {
-                         @Override
-                         public void actionPerformed(ActionEvent ae)
-                         {
-                             
-                            EventQueue.invokeLater(new Runnable() 
-                            {
-                                @Override
-                                public void run() 
-                                {
-                                    //display(path);
-                                }
-                            });
-                         }
-                   });
-                    
-                    
+                        @Override
+                        public void run() 
+                        {
+                            PanelBrowser.display(path);
+                        }
+                    });
+                           
                 }
                 else
                 {
                     System.out.println("L'ouverture est annulée\n");
                 }
-                
             }
 
-            private void addActionListener(ActionListener actionListener) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
+            
         });
         // evenement sur l'item charger le projet
         item1.addActionListener(new ActionListener() 
@@ -108,31 +95,23 @@ public class MaFenetre extends JFrame
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue==fileChooser.APPROVE_OPTION)
+                if (returnValue==JFileChooser.APPROVE_OPTION)
                 {
-                   
+                   System.exit(0);
                     System.out.println(fileChooser.getSelectedFile().getName());
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                     final String path=fileChooser.getSelectedFile().getAbsolutePath();
-                    this.addActionListener(new ActionListener() 
+                    EventQueue.invokeLater(new Runnable() 
                     {
-                         @Override
-                         public void actionPerformed(ActionEvent ae)
-                         {
-                             
-                            EventQueue.invokeLater(new Runnable() 
-                            {
-                                @Override
-                                public void run() 
-                                {
+                        @Override
+                        public void run() 
+                        {
                                     
-                                    //display(path);
-                                }
-                            });
-                         }
-                   });
-                    
+                            PanelBrowser.display(path);
+                        }
+                    });
                 }
+               
                 else
                 {
                     System.out.println("L'ouverture est annulée\n");

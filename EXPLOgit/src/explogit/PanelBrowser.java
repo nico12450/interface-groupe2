@@ -162,11 +162,11 @@ public class PanelBrowser extends Box
 
     public static void display(String path) 
     {
-       // String path = "..//.git";
-       // String path = "..\\..\\interface-groupe2";
+       //String path = "..//.git";
+        //String path = "..\\..\\interface-groupe2";
         PanelBrowser browser = new PanelBrowser(new File(path));
         JFrame f = new JFrame("Explorateur fichier .git");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.add(new JScrollPane(browser) 
         {
             @Override
@@ -181,7 +181,7 @@ public class PanelBrowser extends Box
         f.setVisible(true);
     }
 
-    /*public static void main(String[] args) 
+   /* public static void main(String[] args) 
     {
         EventQueue.invokeLater(new Runnable() 
         {
