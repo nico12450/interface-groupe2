@@ -97,7 +97,7 @@ public class MaFenetre extends JFrame
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue==JFileChooser.APPROVE_OPTION)
                 {
-                   System.exit(0);
+                   
                     System.out.println(fileChooser.getSelectedFile().getName());
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                     final String path=fileChooser.getSelectedFile().getAbsolutePath();
@@ -119,9 +119,7 @@ public class MaFenetre extends JFrame
                 
             }
 
-            private void addActionListener(ActionListener actionListener) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
+           
         });
         
        
