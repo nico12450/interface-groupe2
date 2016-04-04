@@ -193,5 +193,3 @@ public class PanelBrowser extends Box
         });
     }*/
 }
-
-//modification
