@@ -33,7 +33,6 @@ public class PanelBrowser extends Box
     public PanelBrowser(File root)
     {
         super(BoxLayout.LINE_AXIS);
-//modification
         setBackground(Color.red);
         FilePanel panel = new FilePanel(this, root);
         list.add(panel);
@@ -63,10 +62,9 @@ public class PanelBrowser extends Box
             }
         });
     }
-    
+
     private static class FilePanel extends Box 
     {
-//modification
 
         private static FileSystemView fsv = FileSystemView.getFileSystemView();
         private static DateFormat df = DateFormat.getDateTimeInstance(
@@ -90,10 +88,20 @@ public class PanelBrowser extends Box
                 final String v = String.valueOf(file.length());
                 JLabel length = new JLabel("Size: " + v);
                 this.add(length);
+                
+                // affichage du chemin de l'objet dans la console 
                 String chemin = file.getPath();
                 String[] liste = chemin.split(chemin);
-               chemin.split(chemin);               
+                chemin.split(chemin);               
                 System.out.println(chemin);
+                
+                 // recuperation cle
+                
+                 String[] splited = chemin.split("/");
+                 int n = splited.length;
+                 String cle = splited[n-2] + splited[n-1];
+                 
+                 System.out.print(cle);                   
             }
             if (file.isDirectory()) 
             {
@@ -128,7 +136,6 @@ public class PanelBrowser extends Box
                 File f = (File) value;
                 setText(f.getName());
                 setIcon(fsv.getSystemIcon(f));
-//modification
                 return label;
             }
         }
@@ -144,7 +151,6 @@ public class PanelBrowser extends Box
                 {
                     File f = (File) list.getSelectedValue();
                     parent.update(FilePanel.this, f);
-                     
                 }
             }
         }
@@ -173,10 +179,11 @@ public class PanelBrowser extends Box
        //String path = "..//.git";
         //String path = "..\\..\\interface-groupe2";
         PanelBrowser browser = new PanelBrowser(new File(path));
+        //System.out.println(path); 
         JFrame f = new JFrame("Explorateur fichier .git");
         f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.add(new JScrollPane(browser) 
-        {
+              {
             @Override
             public int getVerticalScrollBarPolicy() 
             {
