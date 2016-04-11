@@ -21,7 +21,7 @@ public class MaFenetre extends JFrame
         JPanel top = new JPanel();
                
         /*creation des boutons*/
-        JButton bouton1 = new JButton("Charger le projet:");
+        JLabel label = new JLabel("Bienvenue dans le projet Git");
         
         /*creation du menu bar*/
         JMenuBar menuBar = new JMenuBar();
@@ -30,7 +30,7 @@ public class MaFenetre extends JFrame
         
               
         /*Definir taille fenetre*/
-        this.setSize(500, 500);
+        this.setSize(500, 200);
         
         //Nous demandons maintenant à notre objet de se positionner au centre
         this.setLocationRelativeTo(null);
@@ -42,7 +42,7 @@ public class MaFenetre extends JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         /*PANEL*/
-        top.add(bouton1);
+        top.add(label);
         
         /*menu bar */
         menu1.add(item1);
@@ -52,40 +52,7 @@ public class MaFenetre extends JFrame
         /*ajout panel top a celui de font en haut*/
         font.add(top,BorderLayout.CENTER);
         
-        /*evenement bouton et ouvrir le projet */
-        bouton1.addActionListener(new ActionListener() 
-        {
-            @Override
-            public void actionPerformed(ActionEvent ae) 
-            {
-                
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                int returnValue = fileChooser.showOpenDialog(null);
-                if (returnValue==JFileChooser.APPROVE_OPTION)
-                {
-                    
-                    System.out.println(fileChooser.getSelectedFile().getName());
-                    System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
-                    final String  path=fileChooser.getSelectedFile().getAbsolutePath();
-                    EventQueue.invokeLater(new Runnable() 
-                    {
-                        @Override
-                        public void run() 
-                        {
-                            PanelBrowser.display(path);
-                        }
-                    });
-                           
-                }
-                else
-                {
-                    System.out.println("L'ouverture est annulée\n");
-                }
-            }
-
-            
-        });
+        
         // evenement sur l'item charger le projet
         item1.addActionListener(new ActionListener() 
         {
@@ -116,17 +83,12 @@ public class MaFenetre extends JFrame
                 {
                     System.out.println("L'ouverture est annulée\n");
                 }
-                
             }
-
-           
         });
         
-       
         /*rendre la fenetre visible et non redimentionnable*/
         this.setJMenuBar(menuBar);
         this.setContentPane(font);
         this.setResizable(false);
-        //this.setAlwaysOnTop(true);
     }    
 }

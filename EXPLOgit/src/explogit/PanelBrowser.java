@@ -39,6 +39,11 @@ public class PanelBrowser extends Box
         this.add(panel);
     }
 
+    /**
+     *
+     * @param fp
+     * @param file
+     */
     public void update(FilePanel fp, File file) 
     {
         int index = list.indexOf(fp);
@@ -67,8 +72,7 @@ public class PanelBrowser extends Box
     {
 
         private static FileSystemView fsv = FileSystemView.getFileSystemView();
-        private static DateFormat df = DateFormat.getDateTimeInstance(
-            DateFormat.SHORT, DateFormat.DEFAULT);
+        private static DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.DEFAULT);
         private PanelBrowser parent;
         private JList list;
 
@@ -77,7 +81,8 @@ public class PanelBrowser extends Box
             super(BoxLayout.PAGE_AXIS);
             this.parent = parent;
             DefaultListModel model = new DefaultListModel();
-            if (file.isFile()) {
+            if (file.isFile()) 
+            {
                 JLabel name = new JLabel(file.getName());
                 name.setIcon(fsv.getSystemIcon(file));
                 this.add(name);
@@ -85,9 +90,11 @@ public class PanelBrowser extends Box
                 Date d = new Date(file.lastModified());
                 JLabel mod = new JLabel("Date: " + df.format(d));
                 this.add(mod);
+               
                 final String v = String.valueOf(file.length());
-                JLabel length = new JLabel("Size: " + v);
+                JLabel length = new JLabel("Size: " + v+"ko");
                 this.add(length);
+                            
             }
             if (file.isDirectory()) 
             {
@@ -162,8 +169,6 @@ public class PanelBrowser extends Box
 
     public static void display(String path) 
     {
-       //String path = "..//.git";
-        //String path = "..\\..\\interface-groupe2";
         PanelBrowser browser = new PanelBrowser(new File(path));
         JFrame f = new JFrame("Explorateur fichier .git");
         f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -180,16 +185,4 @@ public class PanelBrowser extends Box
         f.setLocationRelativeTo(null);
         f.setVisible(true);
     }
-
-   /* public static void main(String[] args) 
-    {
-        EventQueue.invokeLater(new Runnable() 
-        {
-            @Override
-            public void run() 
-            {
-                display();
-            }
-        });
-    }*/
 }

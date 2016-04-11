@@ -19,7 +19,6 @@ public class EXPLOgit
     {
         //creation de la fenetre 
         MaFenetre fenetre =  new MaFenetre("Explorateur Git");
-        
         fenetre.setVisible(true);
     }
     
