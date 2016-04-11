@@ -3,6 +3,9 @@ package explogit;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -74,7 +77,11 @@ public class MaFenetre extends JFrame
                         public void run() 
                         {
                                     
-                            PanelBrowser.display(path);
+                            try {
+                                PanelBrowser.display(path);
+                            } catch (IOException ex) {
+                                Logger.getLogger(MaFenetre.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     });
                 }

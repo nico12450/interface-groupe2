@@ -5,10 +5,16 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.zip.InflaterInputStream;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
@@ -30,7 +36,7 @@ public class PanelBrowser extends Box
     private static final Dimension SIZE = new Dimension(200, 300);
     private List<FilePanel> list = new ArrayList<FilePanel>();
 
-    public PanelBrowser(File root)
+    public PanelBrowser(File root) throws IOException
     {
         super(BoxLayout.LINE_AXIS);
         setBackground(Color.red);
@@ -44,7 +50,7 @@ public class PanelBrowser extends Box
      * @param fp
      * @param file
      */
-    public void update(FilePanel fp, File file) 
+    public void update(FilePanel fp, File file) throws IOException 
     {
         int index = list.indexOf(fp);
         int i = list.size() - 1;
@@ -76,7 +82,7 @@ public class PanelBrowser extends Box
         private PanelBrowser parent;
         private JList list;
 
-        public FilePanel(PanelBrowser parent, File file) 
+        public FilePanel(PanelBrowser parent, File file) throws IOException 
         {
             super(BoxLayout.PAGE_AXIS);
             this.parent = parent;
@@ -94,6 +100,14 @@ public class PanelBrowser extends Box
                 final String v = String.valueOf(file.length());
                 JLabel length = new JLabel("Size: " + v+"ko");
                 this.add(length);
+                
+                
+                /**/
+                unzip type1 = new  unzip();
+                String type = type1.Decompresser(file.getAbsolutePath());
+                JLabel typeObject = new JLabel("type: " +type);
+                this.add(typeObject);
+                /**/
                             
             }
             if (file.isDirectory()) 
@@ -143,7 +157,11 @@ public class PanelBrowser extends Box
                 if (!e.getValueIsAdjusting()) 
                 {
                     File f = (File) list.getSelectedValue();
-                    parent.update(FilePanel.this, f);
+                    try {
+                        parent.update(FilePanel.this, f);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PanelBrowser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }
@@ -167,7 +185,7 @@ public class PanelBrowser extends Box
         }
     }
 
-    public static void display(String path) 
+    public static void display(String path) throws IOException 
     {
         PanelBrowser browser = new PanelBrowser(new File(path));
         JFrame f = new JFrame("Explorateur fichier .git");
