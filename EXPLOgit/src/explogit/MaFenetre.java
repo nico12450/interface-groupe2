@@ -21,7 +21,7 @@ public class MaFenetre extends JFrame
         JPanel top = new JPanel();
                
         /*creation des boutons*/
-        JLabel label = new JLabel("Bienvenue dans le projet Git");
+        JLabel label = new JLabel("Bienvenue dans le projet Git:");
         
         /*creation du menu bar*/
         JMenuBar menuBar = new JMenuBar();
