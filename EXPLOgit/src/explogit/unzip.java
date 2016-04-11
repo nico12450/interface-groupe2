@@ -22,8 +22,7 @@ public  class unzip
 	    stream.close();		    
 	    String string = new String(uncompressedData,"UTF-8");
 	    String[] split = string.split(" ");	    
-             System.out.println(split[0]);
-	    return split[0];
+             return split[0];
 	    }     
 	    
 	}
