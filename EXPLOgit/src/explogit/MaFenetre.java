@@ -30,6 +30,7 @@ public class MaFenetre extends JFrame
         JMenuBar menuBar = new JMenuBar();
         JMenu menu1 = new JMenu("Fichier"); 
         JMenuItem item1 = new JMenuItem("Ouvrir"); 
+        JMenuItem item2 = new JMenuItem("extraire zip"); 
         
               
         /*Definir taille fenetre*/
@@ -49,6 +50,7 @@ public class MaFenetre extends JFrame
         
         /*menu bar */
         menu1.add(item1);
+        menu1.add(item2);
         menuBar.add(menu1);
         
         this.add(font,BorderLayout.CENTER);
@@ -63,7 +65,7 @@ public class MaFenetre extends JFrame
             public void actionPerformed(ActionEvent ae)
             {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue==JFileChooser.APPROVE_OPTION)
                 {
@@ -82,6 +84,43 @@ public class MaFenetre extends JFrame
                             } catch (IOException ex) {
                                 Logger.getLogger(MaFenetre.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                        }
+                    });
+                }
+               
+                else
+                {
+                    System.out.println("L'ouverture est annulée\n");
+                }
+            }
+        });
+        
+        item2.addActionListener(new ActionListener() 
+        {
+            @Override
+            public void actionPerformed(ActionEvent ae)
+            {
+                final JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue==JFileChooser.APPROVE_OPTION)
+                {
+                    final String path=fileChooser.getSelectedFile().getAbsolutePath();
+                    
+                    EventQueue.invokeLater(new Runnable() 
+                    {
+                        @Override
+                        public void run() 
+                        {
+                            
+                            try 
+                            {
+                                zip.decompress(fileChooser.getSelectedFile().getAbsolutePath(),fileChooser.getSelectedFile().getParent(), false);
+                            } catch (IOException ex) 
+                            {
+                                Logger.getLogger(MaFenetre.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                             
                         }
                     });
                 }

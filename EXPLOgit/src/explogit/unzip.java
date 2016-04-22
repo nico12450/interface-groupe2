@@ -6,7 +6,8 @@ import java.util.zip.InflaterInputStream;
 
 public  class unzip
 {
-        public String Decompresser( String filename) throws IOException {
+        public String Decompresser( String filename) throws IOException 
+        {
 
 	{
 	    byte[] uncompressedData = new byte[1024];
@@ -22,7 +23,7 @@ public  class unzip
 	    stream.close();		    
 	    String string = new String(uncompressedData,"UTF-8");
 	    String[] split = string.split(" ");	    
-             return split[0];
+            return split[0];
 	    }     
 	    
 	}
