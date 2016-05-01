@@ -3,18 +3,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.InflaterInputStream;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
@@ -22,7 +19,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -34,7 +30,7 @@ public class PanelBrowser extends Box
 {
     
     private static final Dimension SIZE = new Dimension(200, 300);
-    private List<FilePanel> list = new ArrayList<FilePanel>();
+    private List<FilePanel> list = new ArrayList<>();
 
     public PanelBrowser(File root) throws IOException
     {
@@ -46,9 +42,9 @@ public class PanelBrowser extends Box
     }
 
     /**
-     *
      * @param fp
      * @param file
+     * @throws IOException
      */
     public void update(FilePanel fp, File file) throws IOException 
     {
@@ -76,7 +72,6 @@ public class PanelBrowser extends Box
 
     private static class FilePanel extends Box 
     {
-
         private static FileSystemView fsv = FileSystemView.getFileSystemView();
         private static DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.DEFAULT);
         private PanelBrowser parent;
@@ -98,17 +93,26 @@ public class PanelBrowser extends Box
                 this.add(mod);
                
                 final String v = String.valueOf(file.length());
-                JLabel length = new JLabel("Size: " + v+"ko");
+                JLabel length = new JLabel("Size: " + v);
                 this.add(length);
-                
-                
-                /**/
-                unzip type1 = new  unzip();
-                String type = type1.Decompresser(file.getAbsolutePath());
-                JLabel typeObject = new JLabel("type: " +type);
-                this.add(typeObject);
-                /**/
-                            
+                      
+                File dossier=new File("C:\\Users\\romain\\Documents\\GitHub\\interface-groupe2\\.git\\objects");
+                if(dossier.compareTo(file.getParentFile().getParentFile())==0)
+                {
+                    unzip type1 = new  unzip();
+                    String type = type1.Decompresser(file.getAbsolutePath());
+                    JLabel typeObject = new JLabel("type: " +type);
+                    this.add(typeObject);
+                    
+                }
+                else
+                {
+                    String ext=file.getName().substring(file.getName().lastIndexOf("."));
+                    System.out.println(ext);
+                    JLabel extension = new JLabel("ext: " +ext);
+                    this.add(extension);       
+                }
+                                
             }
             if (file.isDirectory()) 
             {
@@ -135,11 +139,9 @@ public class PanelBrowser extends Box
         {
 
             @Override
-            public Component getListCellRendererComponent(JList list, Object value,
-                int index, boolean isSelected, boolean cellHasFocus) 
+            public Component getListCellRendererComponent(JList list, Object value,int index, boolean isSelected, boolean cellHasFocus) 
             {
-                JLabel label = (JLabel) super.getListCellRendererComponent(
-                    list, value, index, isSelected, cellHasFocus);
+                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 File f = (File) value;
                 setText(f.getName());
                 setIcon(fsv.getSystemIcon(f));
@@ -150,16 +152,18 @@ public class PanelBrowser extends Box
         private class SelectionHandler implements ListSelectionListener 
         {
             private Object FilePanel;
-
             @Override
             public void valueChanged(ListSelectionEvent e) 
             {
                 if (!e.getValueIsAdjusting()) 
                 {
                     File f = (File) list.getSelectedValue();
-                    try {
+                    try 
+                    {
                         parent.update(FilePanel.this, f);
-                    } catch (IOException ex) {
+                    } 
+                    catch (IOException ex) 
+                    {
                         Logger.getLogger(PanelBrowser.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -188,7 +192,7 @@ public class PanelBrowser extends Box
     public static void display(String path) throws IOException 
     {
         PanelBrowser browser = new PanelBrowser(new File(path));
-        JFrame f = new JFrame("Explorateur fichier .git");
+        JFrame f = new JFrame("Explorateur fichier git");
         f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.add(new JScrollPane(browser) 
         {

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.*;
 
 /**
@@ -31,17 +30,13 @@ public class MaFenetre extends JFrame
         JMenu menu1 = new JMenu("Fichier"); 
         JMenuItem item1 = new JMenuItem("Ouvrir"); 
         JMenuItem item2 = new JMenuItem("extraire zip"); 
-        
-              
+                      
         /*Definir taille fenetre*/
         this.setSize(500, 200);
         
         //Nous demandons maintenant à notre objet de se positionner au centre
         this.setLocationRelativeTo(null);
-        
-        //Nous demandons maintenant à notre objet de se positionner au centre
-        this.setLocationRelativeTo(null);
-                
+                       
         //Termine le processus lorsqu'on clique sur la croix rouge
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -53,8 +48,8 @@ public class MaFenetre extends JFrame
         menu1.add(item2);
         menuBar.add(menu1);
         
-        this.add(font,BorderLayout.CENTER);
         /*ajout panel top a celui de font en haut*/
+        this.add(font,BorderLayout.CENTER);
         font.add(top,BorderLayout.CENTER);
         
         
@@ -69,9 +64,6 @@ public class MaFenetre extends JFrame
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue==JFileChooser.APPROVE_OPTION)
                 {
-                   
-                    System.out.println(fileChooser.getSelectedFile().getName());
-                    System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                     final String path=fileChooser.getSelectedFile().getAbsolutePath();
                     EventQueue.invokeLater(new Runnable() 
                     {
@@ -79,15 +71,17 @@ public class MaFenetre extends JFrame
                         public void run() 
                         {
                                     
-                            try {
+                            try 
+                            {
                                 PanelBrowser.display(path);
-                            } catch (IOException ex) {
+                            } 
+                            catch (IOException ex) 
+                            {
                                 Logger.getLogger(MaFenetre.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         }
                     });
                 }
-               
                 else
                 {
                     System.out.println("L'ouverture est annulée\n");
@@ -115,16 +109,16 @@ public class MaFenetre extends JFrame
                             
                             try 
                             {
-                                zip.decompress(fileChooser.getSelectedFile().getAbsolutePath(),fileChooser.getSelectedFile().getParent(), false);
-                            } catch (IOException ex) 
+                                zip.decompress(path,fileChooser.getSelectedFile().getParent(), false);
+                                
+                            } 
+                            catch (IOException ex) 
                             {
                                 Logger.getLogger(MaFenetre.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                             
-                        }
+                        }                                             
                     });
                 }
-               
                 else
                 {
                     System.out.println("L'ouverture est annulée\n");

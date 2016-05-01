@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package explogit;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -29,19 +22,20 @@ public class zip
         ZipEntry ze;
         try {    
 	        // Parcourt tous les fichiers
-	        while (null != (ze = zis.getNextEntry())) {
+	        while (null != (ze = zis.getNextEntry())) 
+                {
 	            final File f = new File(folder.getCanonicalPath(), ze.getName());
 	            if (f.exists())
 	            	f.delete();
 	            
 	            // Création des dossiers
-	            if (ze.isDirectory()) {
+	            if (ze.isDirectory()) 
+                    {
 	                f.mkdirs();
 	                continue;
 	            }
 	            f.getParentFile().mkdirs();
-	            final OutputStream fos = new BufferedOutputStream(
-	            		new FileOutputStream(f));
+	            final OutputStream fos = new BufferedOutputStream(new FileOutputStream(f));
 	            
 	            // Ecriture des fichiers
 	            try {
@@ -53,47 +47,42 @@ public class zip
 	                } finally {
 	                    fos.close();
 	                }
-	            } catch (final IOException ioe) {
+	            } catch (final IOException ioe) 
+                    {
 	                f.delete();
 	                throw ioe;
 	            }
 	        }
-        } finally {
+        } 
+        finally 
+        {
         	zis.close();
         }
         if (deleteZipAfter)
         	file.delete();
     }
 	
-	public static void decompress(final String fileName, final String folderName,
-		final boolean deleteZipAfter)
-    throws IOException 
+	public static void decompress(final String fileName, final String folderName,final boolean deleteZipAfter)throws IOException 
         {
 		decompress(new File(fileName), new File(folderName), deleteZipAfter);
 	}
-	public static void decompress(final String fileName, final String folderName)
-    throws IOException 
+	public static void decompress(final String fileName, final String folderName)throws IOException 
         {
 		decompress(new File(fileName), new File(folderName), false);
 	}
-	public static void decompress(final File file, final boolean deleteZipAfter)
-    throws IOException 
+	public static void decompress(final File file, final boolean deleteZipAfter)throws IOException 
         {
 		decompress(file, file.getCanonicalFile().getParentFile(), deleteZipAfter);
 	}
-	public static void decompress(final String fileName,
-		final boolean deleteZipAfter)
-    throws IOException 
+	public static void decompress(final String fileName,final boolean deleteZipAfter)throws IOException 
         {
 		decompress(new File(fileName), deleteZipAfter);
 	}
-	public static void decompress(final File file)
-    throws IOException 
+	public static void decompress(final File file)throws IOException 
         {
 		decompress(file, file.getCanonicalFile().getParentFile(), false);
 	}
-	public static void decompress(final String fileName)
-    throws IOException 
+	public static void decompress(final String fileName)throws IOException 
         {
 		decompress(new File(fileName));
 	}
